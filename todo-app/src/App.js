@@ -11,7 +11,7 @@ export default class App extends Component {
   }
 
   getLocalData = () => {
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     this.setState({
       tasks
     })
@@ -24,17 +24,17 @@ export default class App extends Component {
     })
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.getLocalData()
   }
 
   onAdd = (task) => {
     let tasks = this.state.tasks.slice();
-    tasks.push(task);
+    tasks.push(task)
     this.saveLocalData(tasks)
   }
 
-  onDelete = (id) => {
+  onChangeComplete = (id) => {
     const tasks = this.state.tasks.slice();
     tasks.find(item => {
       if (item.id === id) {
@@ -44,11 +44,39 @@ export default class App extends Component {
     this.saveLocalData(tasks)
   }
 
+  onDelete = (id) => {
+    let tasks = this.state.tasks.slice();  
+    const item = tasks.find(item => {
+      if (item.id === id) {
+        return item
+      }
+    })
+    const index = tasks.indexOf(item)
+    tasks.splice(index,1)
+    this.saveLocalData(tasks)
+  }
+
+  onSave = (task) => {
+    let tasks = this.state.tasks.slice();
+    tasks.find(item => {
+      if (item.id === task.id) {
+        item.value = task.value
+      }
+    })
+    this.saveLocalData(tasks)
+  }
+
+
   render() {
     return (
       <div className="container">
         <Header />
-        <TaskList onAdd={(task) => this.onAdd(task)} tasks={this.state.tasks} onDelete={(id) => this.onDelete(id)}/>
+        <TaskList onAdd={(task) => this.onAdd(task)} 
+        tasks={this.state.tasks} 
+        onDelete={(id) => this.onDelete(id)}
+        onSave={(task) => this.onSave(task)}
+        onCheck={(id) => this.onChangeComplete(id)}
+        onUndo={(id) => this.onChangeComplete(id)}/>
       </div>
     )
   }

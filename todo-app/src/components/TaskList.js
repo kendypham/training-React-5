@@ -10,7 +10,8 @@ class TaskList extends Component {
                 value: "",
                 isComplete: false
             },
-            tasks: this.props.tasks
+            isAll : true
+           
         }
     }
 
@@ -38,16 +39,16 @@ class TaskList extends Component {
         this.clean();
     }
 
-    showAll = () => {
-        let tasks = this.state.tasks.slice();
-        tasks = tasks.filter(item => item.isComplete)
-        console.log("show all", tasks);
+    showComplete = () => {
+        this.setState({
+            isAll : false
+        })
     }
 
-    showComplete = () => {
-        let tasks = this.state.tasks.slice();
-        tasks = tasks.filter(item => !item.isComplete)
-        console.log("show complete", tasks);
+    showAll = () => {
+        this.setState({
+            isAll : true
+        })
     }
 
     render() {
@@ -64,10 +65,15 @@ class TaskList extends Component {
                                 <button className="float-right btn btn-primary fas fa-plus-square" onClick={() => this.onAdd()}></button>
                             </div>
                             <div className="card-body">
-                                <TaskItems tasks={this.props.tasks} onDelete={(id) => this.props.onDelete(id)} />
+                                <TaskItems tasks={this.props.tasks}
+                                onSave={(task) => this.props.onSave(task)} 
+                                onDelete={(id) => this.props.onDelete(id)}
+                                onCheck={(id) => this.props.onCheck(id)}
+                                onUndo={(id) => this.props.onUndo(id)} 
+                                isAll={this.state.isAll}/>
                             </div>
                             <div className="card-footer d-flex justify-content-center">
-                                <button className="btn btn-primary mr-2" onClick={() => this.showAll()}>Show All</button>
+                                <button className="btn btn-success mr-2" onClick={() => this.showAll()}>Show All</button>
                                 <button className="btn btn-warning" onClick={() => this.showComplete()}>Show Completed</button>
                             </div>
                         </div>
