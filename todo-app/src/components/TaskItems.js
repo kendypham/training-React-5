@@ -17,7 +17,7 @@ export default class TaskItems extends Component {
      * @param  {object} task - Store the task passed to Modal
      */
 
-    editItem (task){
+    editItem(task) {
         this.setState({
             task
         })
@@ -48,11 +48,10 @@ export default class TaskItems extends Component {
         const item = this.props.isAll ? itemTodo : itemComplete
         return (
             <div>
-                {this.state.isClick && <h1>aaaaaaaaaaaaaa</h1>}
                 <ul className="list-group" id="list-item">
                     {item}
                 </ul>
-                 <Modal task={this.state.task} onSave={(task) => this.props.onSave(task)}/>
+                 <Modal task={this.state.task} onSave={this.props.onSave}/>
             </div>
         )
     }

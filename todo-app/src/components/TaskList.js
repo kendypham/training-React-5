@@ -11,7 +11,6 @@ class TaskList extends Component {
                 isComplete: false
             },
             isAll: true
-
         }
     }
 
@@ -46,7 +45,7 @@ class TaskList extends Component {
      * pass data to App by function callback
      */
 
-    onAdd() {
+    onAdd = () => {
         this.props.onAdd(this.state.task);
         this.clean();
     }
@@ -55,7 +54,7 @@ class TaskList extends Component {
      * Set condition to render item in TaskItem
      */
 
-    showComplete() {
+    showComplete = () => {
         this.setState({
             isAll: false
         })
@@ -65,11 +64,13 @@ class TaskList extends Component {
      * Set condition to render item in TaskItem
      */
 
-    showAll() {
+    showAll = () => {
         this.setState({
             isAll: true
         })
     }
+
+    
 
     /**
      * Render card which contains list items
@@ -86,19 +87,19 @@ class TaskList extends Component {
                                     value={this.state.task.value}
                                     type="text" placeholder="What needs to be done"
                                     onChange={this.handleChange} />
-                                <button className="float-right btn btn-primary fas fa-plus-square" onClick={() => this.onAdd()}></button>
+                                <button className="float-right btn btn-primary fas fa-plus-square" onClick={this.onAdd}></button>
                             </div>
                             <div className="card-body">
                                 <TaskItems tasks={this.props.tasks}
-                                    onSave={(task) => this.props.onSave(task)}
-                                    onDelete={(id) => this.props.onDelete(id)}
-                                    onCheck={(id) => this.props.onCheck(id)}
-                                    onUndo={(id) => this.props.onUndo(id)}
+                                    onSave={this.props.onSave}
+                                    onDelete={this.props.onDelete}
+                                    onCheck={this.props.onCheck}
+                                    onUndo={this.props.onUndo}
                                     isAll={this.state.isAll} />
                             </div>
                             <div className="card-footer d-flex justify-content-center">
-                                <button className="btn btn-success mr-2" onClick={() => this.showAll()}>Show All</button>
-                                <button className="btn btn-warning" onClick={() => this.showComplete()}>Show Completed</button>
+                                <button className="btn btn-success mr-2" onClick={this.showAll}>Show All</button>
+                                <button className="btn btn-warning" onClick={this.showComplete}>Show Completed</button>
                             </div>
                         </div>
                     </div>

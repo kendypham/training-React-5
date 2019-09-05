@@ -41,6 +41,14 @@ export default class Modal extends Component {
     }
 
     /**
+     * call onSave function from parent
+     */
+
+    onSave = () => {
+        this.props.onSave(this.state.task)
+    }
+
+    /**
      *  render form modal which can be used to change the value of task
      */
 
@@ -60,7 +68,7 @@ export default class Modal extends Component {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => this.props.onSave(this.state.task)}>Save changes</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.onSave}>Save changes</button>
                         </div>
                     </div>
                 </div>
