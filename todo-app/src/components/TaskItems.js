@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from 'react'
 import Modal from './Modal';
 
@@ -12,11 +13,21 @@ export default class TaskItems extends Component {
         }
     }
 
-    editItem = (item) => {
+    /**
+     * @param  {object} task - Store the task passed to Modal
+     */
+
+    editItem (task){
         this.setState({
-            task : item,
+            task
         })
     }
+
+    
+    /**
+     * Show the list items base on status isComplete
+     */
+    
     render() {
         const itemComplete = this.props.tasks.map((task, index) => {
             if (task.isComplete) {
@@ -34,7 +45,7 @@ export default class TaskItems extends Component {
                 </li>
             }
         })
-        const item = this.props.isAll ? itemTodo : itemComplete;
+        const item = this.props.isAll ? itemTodo : itemComplete
         return (
             <div>
                 {this.state.isClick && <h1>aaaaaaaaaaaaaa</h1>}

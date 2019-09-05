@@ -1,31 +1,49 @@
 import React, { Component } from 'react'
 
 export default class Modal extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            task : {
-                id : "",
-                isComplete : "",
-                value : ""
+            task: {
+                id: "",
+                isComplete: "",
+                value: ""
             }
         }
     }
-    static getDerivedStateFromProps(props, state){
-        if(state.task.id !== props.task.id){
+
+    /**
+     * @param  {object} props - The new props
+     * @param  {object} state - The old state
+     * Check when props update
+     */
+
+    static getDerivedStateFromProps(props, state) {
+        if (state.task.id !== props.task.id) {
             state = props
         }
         return state
     }
+
+    /**
+     * @param  {object} e - Get event when user changes value of input
+     * Update new state 
+     */
+
     onChange = (e) => {
         this.setState({
-            task : {
+            task: {
                 [e.target.name]: e.target.value,
-                id : this.props.task.id,
-                isComplete : this.props.task.isComplete
+                id: this.props.task.id,
+                isComplete: this.props.task.isComplete
             }
         })
     }
+
+    /**
+     *  render form modal which can be used to change the value of task
+     */
+
     render() {
         return (
             <div className="modal fade" id="editForm" tabIndex="-1" role="dialog" aria-labelledby="editFormTitle" aria-hidden="true">
@@ -38,7 +56,7 @@ export default class Modal extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <input className="w-100" type="text" name="value"  value={this.state.task.value} onChange={this.onChange}></input>
+                            <input className="w-100" type="text" name="value" value={this.state.task.value} onChange={this.onChange}></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
