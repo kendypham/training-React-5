@@ -2,39 +2,16 @@
 import React, { useState, useEffect } from 'react'
 import Header from './components/Header';
 import TaskList from './components/TaskList';
+import * as todo from './utils'
 
 const App = props => {
   const [tasks, setTasks] = useState([])
-
-  /**
-   * Get data from localStorage
-   */
-
-  const getLocalData = () => {
-    setTasks(JSON.parse(localStorage.getItem("tasks")) || [])
-  }
-
-  /**
-   * @param  {object} tasks - array which contains tasks 
-   * Save data to localStorage
-   */
-
-  const saveLocalData = (tasks) => {
-    localStorage.setItem("tasks",JSON.stringify(tasks));
-    setTasks(tasks)
-  }
-
-  
   /**
    * Get data from localStorage when first render
    */
 
-  // componentDidMount = () => {
-  //   this.getLocalData()
-  // }
-
   useEffect(() => {
-    getLocalData()
+    todo.getLocalData(setTasks)
   }, [])
 
   /**
@@ -45,7 +22,7 @@ const App = props => {
   const onAdd = (task) => {
     const tasksCopy = tasks.slice()
     tasksCopy.push(task)
-    saveLocalData(tasksCopy)
+    todo.saveLocalData(tasksCopy,setTasks)
   }
 
   
@@ -61,7 +38,7 @@ const App = props => {
         item.isComplete = !item.isComplete
       }
     })
-    saveLocalData(tasksCopy)
+    todo.saveLocalData(tasksCopy,setTasks)
   }
 
   /**
@@ -78,7 +55,7 @@ const App = props => {
     })
     const index = tasksCopy.indexOf(item)
     tasksCopy.splice(index,1)
-    saveLocalData(tasksCopy)
+    todo.saveLocalData(tasksCopy,setTasks)
   }
 
   /**
@@ -93,7 +70,7 @@ const App = props => {
         item.value = task.value
       }
     })
-    saveLocalData(tasksCopy)
+    todo.saveLocalData(tasksCopy,setTasks)
   }
 
   
