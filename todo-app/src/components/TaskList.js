@@ -1,30 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import TaskItems from './TaskItems';
 import randomstring from 'randomstring';
-class TaskList extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            task: {
-                id: "",
-                value: "",
-                isComplete: false
-            },
-            isAll: true
-        }
-    }
+const TaskList = props => {
+    const [task, setTask] = useState({
+        id: "",
+        value: "",
+        isComplete: false
+    })
+
+    const [isAll, setIsAll] = useState(true)
 
     /**
      * @param  {object} e - Event when input change value
      */
     
-    handleChange = (e) => {
-        this.setState({
-            task: {
-                id: randomstring.generate(7),
-                [e.target.name]: e.target.value,
-                isComplete: false
-            }
+    const handleChange = (e) => {
+        setTask({
+            id: randomstring.generate(7),
+            [e.target.name]: e.target.value,
+            isComplete: false
         })
     }
 
@@ -32,12 +26,10 @@ class TaskList extends Component {
      * Reset the input value when clicked add button
      */
 
-    clean() {
-        this.setState({
-            task: {
-                id: "",
-                value: ""
-            }
+    const clean = () => {
+        setTask({
+            id: "",
+            value: ""
         })
     }
 
@@ -45,38 +37,30 @@ class TaskList extends Component {
      * pass data to App by function callback
      */
 
-    onAdd = () => {
-        this.props.onAdd(this.state.task);
-        this.clean();
+    const onAdd = () => {
+        props.onAdd(task);
+        clean();
     }
 
     /**
      * Set condition to render item in TaskItem
      */
 
-    showComplete = () => {
-        this.setState({
-            isAll: false
-        })
+    const showComplete = () => {
+        setIsAll(false)
     }
 
     /**
      * Set condition to render item in TaskItem
      */
 
-    showAll = () => {
-        this.setState({
-            isAll: true
-        })
+    const showAll = () => {
+        setIsAll(true)
     }
-
-    
 
     /**
      * Render card which contains list items
      */
-
-    render() {
         return (
             <div>
                 <div className="row justify-content-center">
@@ -84,29 +68,28 @@ class TaskList extends Component {
                         <div className="card">
                             <div className="card-header">
                                 <input className="w-50" name="value"
-                                    value={this.state.task.value}
+                                    value={task.value}
                                     type="text" placeholder="What needs to be done"
-                                    onChange={this.handleChange} />
-                                <button className="float-right btn btn-primary fas fa-plus-square" onClick={this.onAdd}></button>
+                                    onChange={handleChange} />
+                                <button className="float-right btn btn-primary fas fa-plus-square" onClick={onAdd}></button>
                             </div>
                             <div className="card-body">
-                                <TaskItems tasks={this.props.tasks}
-                                    onSave={this.props.onSave}
-                                    onDelete={this.props.onDelete}
-                                    onCheck={this.props.onCheck}
-                                    onUndo={this.props.onUndo}
-                                    isAll={this.state.isAll} />
+                                <TaskItems tasks={props.tasks}
+                                    onSave={props.onSave}
+                                    onDelete={props.onDelete}
+                                    onCheck={props.onCheck}
+                                    onUndo={props.onUndo}
+                                    isAll={isAll} />
                             </div>
                             <div className="card-footer d-flex justify-content-center">
-                                <button className="btn btn-success mr-2" onClick={this.showAll}>Show All</button>
-                                <button className="btn btn-warning" onClick={this.showComplete}>Show Completed</button>
+                                <button className="btn btn-success mr-2" onClick={showAll}>Show All</button>
+                                <button className="btn btn-warning" onClick={showComplete}>Show Completed</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         );
-    }
 }
 
 export default TaskList;

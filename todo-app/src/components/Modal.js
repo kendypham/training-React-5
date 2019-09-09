@@ -1,42 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default class Modal extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            task: {
-                id: "",
-                isComplete: "",
-                value: ""
-            }
-        }
-    }
+const Modal = props => {
+    const [task, setTask] = useState({
+        id: "",
+        isComplete: "",
+        value: ""
+    })
 
     /**
-     * @param  {object} props - The new props
-     * @param  {object} state - The old state
-     * Check when props update
+     * Call when props change
      */
-
-    static getDerivedStateFromProps(props, state) {
-        if (state.task.id !== props.task.id) {
-            state = props
-        }
-        return state
-    }
+    useEffect(() => {
+        setTask(props.task)
+    },[props])
 
     /**
      * @param  {object} e - Get event when user changes value of input
      * Update new state 
      */
 
-    onChange = (e) => {
-        this.setState({
-            task: {
-                [e.target.name]: e.target.value,
-                id: this.props.task.id,
-                isComplete: this.props.task.isComplete
-            }
+    const onChange = (e) => {
+        setTask({
+            [e.target.name]: e.target.value,
+            id: props.task.id,
+            isComplete: props.task.isComplete
         })
     }
 
@@ -44,15 +31,14 @@ export default class Modal extends Component {
      * call onSave function from parent
      */
 
-    onSave = () => {
-        this.props.onSave(this.state.task)
+    const onSave = () => {
+        props.onSave(task)
     }
 
     /**
      *  render form modal which can be used to change the value of task
      */
 
-    render() {
         return (
             <div className="modal fade" id="editForm" tabIndex="-1" role="dialog" aria-labelledby="editFormTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
@@ -64,15 +50,16 @@ export default class Modal extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <input className="w-100" type="text" name="value" value={this.state.task.value} onChange={this.onChange}></input>
+                            <input className="w-100" type="text" name="value" value={task.value} onChange={onChange}></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.onSave}>Save changes</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={onSave}>Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
         )
-    }
 }
+
+export default Modal;

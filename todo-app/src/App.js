@@ -1,25 +1,17 @@
 /* eslint-disable array-callback-return */
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './components/Header';
 import TaskList from './components/TaskList';
 
-export default class App extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      tasks : []
-    }
-  }
+const App = props => {
+  const [tasks, setTasks] = useState([])
 
   /**
    * Get data from localStorage
    */
 
-  getLocalData() {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    this.setState({
-      tasks
-    })
+  const getLocalData = () => {
+    setTasks(JSON.parse(localStorage.getItem("tasks")) || [])
   }
 
   /**
@@ -27,11 +19,9 @@ export default class App extends Component {
    * Save data to localStorage
    */
 
-  saveLocalData(tasks) {
+  const saveLocalData = (tasks) => {
     localStorage.setItem("tasks",JSON.stringify(tasks));
-    this.setState({
-      tasks
-    })
+    setTasks(tasks)
   }
 
   
@@ -39,19 +29,23 @@ export default class App extends Component {
    * Get data from localStorage when first render
    */
 
-  componentDidMount = () => {
-    this.getLocalData()
-  }
+  // componentDidMount = () => {
+  //   this.getLocalData()
+  // }
+
+  useEffect(() => {
+    getLocalData()
+  }, [])
 
   /**
    * @param  {object} task - The value of task which contains id, value, and status 
    * This function will add new task to array and save array to localStorage 
    */
 
-  onAdd(task) {
-    const tasks = this.state.tasks.slice();
-    tasks.push(task)
-    this.saveLocalData(tasks)
+  const onAdd = (task) => {
+    const tasksCopy = tasks.slice()
+    tasksCopy.push(task)
+    saveLocalData(tasksCopy)
   }
 
   
@@ -60,14 +54,14 @@ export default class App extends Component {
    * Change status of task when check or undo
    */
 
-  onChangeComplete(id) {
-    const tasks = this.state.tasks.slice();
-    tasks.find(item => {
+  const onChangeComplete = (id) => {
+    const tasksCopy = tasks.slice()
+    tasksCopy.find(item => {
       if (item.id === id) {
         item.isComplete = !item.isComplete
       }
     })
-    this.saveLocalData(tasks)
+    saveLocalData(tasksCopy)
   }
 
   /**
@@ -75,16 +69,16 @@ export default class App extends Component {
    * Delete task with this id in array
    */
 
-  onDelete(id) {
-    const tasks = this.state.tasks.slice();  
-    const item = tasks.find(item => {
+  const onDelete = (id) => {
+    const tasksCopy = tasks.slice()  
+    const item = tasksCopy.find(item => {
       if (item.id === id) {
         return item
       }
     })
-    const index = tasks.indexOf(item)
-    tasks.splice(index,1)
-    this.saveLocalData(tasks)
+    const index = tasksCopy.indexOf(item)
+    tasksCopy.splice(index,1)
+    saveLocalData(tasksCopy)
   }
 
   /**
@@ -92,31 +86,32 @@ export default class App extends Component {
    * Save when edit the value
    */
 
-  onSave(task) {
-    const tasks = this.state.tasks.slice();
-    tasks.find(item => {
+  const onSave = (task) => {
+    const tasksCopy = tasks.slice()
+    tasksCopy.find(item => {
       if (item.id === task.id) {
         item.value = task.value
       }
     })
-    this.saveLocalData(tasks)
+    saveLocalData(tasksCopy)
   }
 
   
   /**
    * render App todo
    */
-  render() {
+ 
     return (
       <div className="container">
         <Header />
-        <TaskList onAdd={(task) => this.onAdd(task)} 
-        tasks={this.state.tasks} 
-        onDelete={(id) => this.onDelete(id)}
-        onSave={(task) => this.onSave(task)}
-        onCheck={(id) => this.onChangeComplete(id)}
-        onUndo={(id) => this.onChangeComplete(id)}/>
+        <TaskList onAdd={(task) => onAdd(task)} 
+        tasks={tasks} 
+        onDelete={(id) => onDelete(id)}
+        onSave={(task) => onSave(task)}
+        onCheck={(id) => onChangeComplete(id)}
+        onUndo={(id) => onChangeComplete(id)}/>
       </div>
     )
-  }
 }
+
+export default App
