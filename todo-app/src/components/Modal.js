@@ -19,7 +19,7 @@ const Modal = props => {
      * Update new state 
      */
 
-    const onChange = (e) => {
+    const handleChange = (e) => {
         setTask({
             [e.target.name]: e.target.value,
             id: props.task.id,
@@ -50,11 +50,11 @@ const Modal = props => {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <input className="w-100" type="text" name="value" value={task.value} onChange={onChange}></input>
+                            <input className="w-100" type="text" name="value" value={task.value} onChange={handleChange}></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={onSave}>Save changes</button>
+                            <button type="button" className="btn btn-primary" id="btn-save" data-dismiss="modal" onClick={onSave}>Save changes</button>
                         </div>
                     </div>
                 </div>
