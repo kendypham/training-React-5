@@ -11,7 +11,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --coverage --coverageDirectory=output/coverage/jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,6 +39,24 @@
     "react-test-renderer": "^16.9.0"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/",
+      "!src/index.js",
+      "!src/serviceWorker.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
   }
 }

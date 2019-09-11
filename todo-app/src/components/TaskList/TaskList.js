@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TaskItems from './TaskItems';
+import TaskItems from '../TaskItems/TaskItems';
 import randomstring from 'randomstring';
 const TaskList = props => {
     const [task, setTask] = useState({

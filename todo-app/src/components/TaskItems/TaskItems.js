@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react'
-import Modal from './Modal';
+import Modal from '../Modal/Modal';
 
 const TaskItems = props => {
     const [task, setTask] = useState({

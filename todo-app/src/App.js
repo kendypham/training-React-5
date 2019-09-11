@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react'
-import Header from './components/Header';
-import TaskList from './components/TaskList';
+import Header from './components/Header/Header';
+import TaskList from './components/TaskList/TaskList';
 import * as todo from './utils'
 
 const App = props => {
