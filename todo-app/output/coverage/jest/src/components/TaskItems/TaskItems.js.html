@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.5% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/16</span>
+        <span class='fraction'>16/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">40% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/10</span>
+        <span class='fraction'>10/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">57.14% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/14</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,6 +97,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,30 +115,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,8 +152,8 @@ const TaskItems = props =&gt; {
      * @param  {object} task - Store the task passed to Modal
      */
 &nbsp;
-    const editItem = <span class="fstat-no" title="function not covered" >(t</span>ask) =&gt; {
-<span class="cstat-no" title="statement not covered" >        setTask(task)</span>
+    const editItem = (task) =&gt; {
+        setTask(task)
     }
 &nbsp;
 &nbsp;
@@ -161,19 +161,19 @@ const TaskItems = props =&gt; {
      * Show the list items base on status isComplete
      */
 &nbsp;
-    const itemComplete = props.tasks.filter((task, index) =&gt; task.isComplete).map(<span class="fstat-no" title="function not covered" >(t</span>ask,index) =&gt; {
-<span class="cstat-no" title="statement not covered" >        return &lt;li className="list-group-item" key={task.id}&gt;{task.value}</span>
-                &lt;button className="float-right fas fa-trash btn btn-danger ml-2" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >props.onDelete(task.id)}</span>&gt;&lt;/button&gt;
-                &lt;button className="float-right fas fa-undo btn btn-info" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >props.onUndo(task.id)}</span>&gt;&lt;/button&gt;&lt;/li&gt;
+    const itemComplete = props.tasks.filter((task, index) =&gt; task.isComplete).map((task,index) =&gt; {
+        return &lt;li className="list-group-item" key={task.id}&gt;{task.value}
+                &lt;button className="float-right fas fa-trash btn btn-danger ml-2" onClick={() =&gt; props.onDelete(task.id)}&gt;&lt;/button&gt;
+                &lt;button className="float-right fas fa-undo btn btn-info" onClick={() =&gt; props.onUndo(task.id)}&gt;&lt;/button&gt;&lt;/li&gt;
     })
     const itemTodo = props.tasks.filter((task, index) =&gt; !task.isComplete).map((task,index) =&gt; {
         return &lt;li className="list-group-item" key={task.id}&gt;{task.value}
-                &lt;button className="float-right fas fa-check btn btn-danger ml-2" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >props.onCheck(task.id)}</span>&gt;&lt;/button&gt;
+                &lt;button className="float-right fas fa-check btn btn-danger ml-2" onClick={() =&gt; props.onCheck(task.id)}&gt;&lt;/button&gt;
                 &lt;button className="float-right fas fa-pencil-alt btn btn-warning btn-edit"
-                    data-toggle="modal" data-target="#editForm" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >editItem(task)}</span>&gt;&lt;/button&gt;
+                    data-toggle="modal" data-target="#editForm" onClick={() =&gt; editItem(task)}&gt;&lt;/button&gt;
             &lt;/li&gt;
     })
-    const item = props.isAll ? itemTodo : <span class="branch-1 cbranch-no" title="branch not covered" >itemComplete</span>
+    const item = props.isAll ? itemTodo : itemComplete
     return (
         &lt;div&gt;
             &lt;ul className="list-group" id="list-item"&gt;
@@ -190,7 +190,7 @@ export default TaskItems</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 11 2019 17:42:00 GMT+0700 (Indochina Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 12 2019 15:44:21 GMT+0700 (Indochina Time)
 </div>
 </div>
 <script src="..\..\..\prettify.js"></script>
