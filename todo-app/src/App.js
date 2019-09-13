@@ -5,7 +5,9 @@ import TaskList from './components/TaskList/TaskList';
 import * as todo from './utils'
 
 const App = props => {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([{
+    id: "test", value: "test", isComplete: true
+  }])
   /**
    * Get data from localStorage when first render
    */
