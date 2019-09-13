@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * Create component header
+ */
+
 export default function Header() {
     return (
         <div className="row justify-content-center">
